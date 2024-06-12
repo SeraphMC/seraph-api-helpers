@@ -1,4 +1,4 @@
-module common_utilities-for-apis
+module github.com/Clemintina/common_utilities-for-apis
 
 go 1.21
 
