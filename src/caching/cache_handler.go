@@ -1,7 +1,7 @@
 package caching
 
 import (
-	"common_utilities-for-apis/src/validation"
+	"github.com/Clemintina/common_utilities-for-apis/src/validation"
 	"github.com/goccy/go-json"
 	"github.com/gofiber/storage/redis"
 	"strings"
