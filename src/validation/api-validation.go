@@ -66,3 +66,11 @@ func HandleError(ctx *fiber.Ctx, status int, cause string, errors []ErrorObject)
 
 	return ctx.Status(status).JSON(errorResponse)
 }
+
+func ParseBody[T any](ctx *fiber.Ctx) (T, error) {
+	var bodyPost T
+	if err := ctx.BodyParser(&bodyPost); err != nil {
+		return bodyPost, err
+	}
+	return bodyPost, nil
+}
