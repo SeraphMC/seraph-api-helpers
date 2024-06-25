@@ -5,7 +5,7 @@ import "time"
 type CubelifyResponse struct {
 	Score     *CubelifyScore         `json:"score,omitempty"`
 	Tags      *[]CubelifyResponseTag `json:"tags,omitempty"`
-	Timestamp time.Time              `json:"timestamp,omitempty"`
+	Timestamp *time.Time             `json:"timestamp,omitempty"`
 	Error     string                 `json:"error,omitempty"`
 	Type      string                 `json:"-,omitempty"`
 }
