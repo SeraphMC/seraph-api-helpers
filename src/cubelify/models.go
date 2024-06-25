@@ -21,4 +21,5 @@ type CubelifyResponseTag struct {
 	TextColour   uint32 `json:"textColor,omitempty"`
 	ToolTipLabel string `json:"tooltip,omitempty"`
 	Colour       uint32 `json:"color,omitempty"`
+	TagName      string `json:"tag_name,omitempty"`
 }
