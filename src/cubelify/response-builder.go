@@ -18,6 +18,11 @@ func (b *CubelifyResponseBuilder) SetScore(score *CubelifyScore) *CubelifyRespon
 	return b
 }
 
+func (b *CubelifyResponseBuilder) AddSniperScore(score *CubelifyScore) *CubelifyResponseBuilder {
+	b.response.Score.Value += score.Value
+	return b
+}
+
 func (b *CubelifyResponseBuilder) SetTags(tags []CubelifyResponseTag) *CubelifyResponseBuilder {
 	b.response.Tags = &tags
 	return b
