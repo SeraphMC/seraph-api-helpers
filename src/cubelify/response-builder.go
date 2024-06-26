@@ -23,6 +23,11 @@ func (b *CubelifyResponseBuilder) SetTags(tags []CubelifyResponseTag) *CubelifyR
 	return b
 }
 
+func (b *CubelifyResponseBuilder) AddTags(tags []CubelifyResponseTag) *CubelifyResponseBuilder {
+	*b.response.Tags = append(*b.response.Tags, tags...)
+	return b
+}
+
 func (b *CubelifyResponseBuilder) SetTimestamp(timestamp *time.Time) *CubelifyResponseBuilder {
 	b.response.Timestamp = timestamp
 	return b
