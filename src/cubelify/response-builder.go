@@ -1,6 +1,9 @@
 package cubelify
 
-import "time"
+import (
+	"github.com/Clemintina/common_utilities-for-apis/src/validation"
+	"time"
+)
 
 type CubelifyResponseBuilder struct {
 	response *CubelifyResponse
@@ -36,5 +39,9 @@ func (b *CubelifyResponseBuilder) SetType(typeStr string) *CubelifyResponseBuild
 }
 
 func (b *CubelifyResponseBuilder) Build() *CubelifyResponse {
+	if b.response.Timestamp == nil {
+		b.response.Timestamp = validation.ToTimePointer(time.Now())
+	}
+
 	return b.response
 }

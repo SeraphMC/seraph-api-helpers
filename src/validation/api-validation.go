@@ -74,3 +74,7 @@ func ParseBody[T any](ctx *fiber.Ctx) (T, error) {
 	}
 	return bodyPost, nil
 }
+
+func ToTimePointer(t time.Time) *time.Time {
+	return &t
+}
