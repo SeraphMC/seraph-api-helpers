@@ -34,6 +34,9 @@ func (b *CubelifyResponseBuilder) AddTags(tags []CubelifyResponseTag) *CubelifyR
 }
 
 func (b *CubelifyResponseBuilder) AddTag(tags CubelifyResponseTag) *CubelifyResponseBuilder {
+	if b.response.Tags == nil {
+		b.response.Tags = &[]CubelifyResponseTag{}
+	}
 	*b.response.Tags = append(*b.response.Tags, tags)
 	return b
 }
