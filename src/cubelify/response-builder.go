@@ -19,6 +19,9 @@ func (b *CubelifyResponseBuilder) SetScore(score *CubelifyScore) *CubelifyRespon
 }
 
 func (b *CubelifyResponseBuilder) AddSniperScore(score *CubelifyScore) *CubelifyResponseBuilder {
+	if b.response.Score == nil {
+		b.response.Score = &CubelifyScore{}
+	}
 	b.response.Score.Value += score.Value
 	return b
 }
