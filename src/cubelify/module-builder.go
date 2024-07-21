@@ -1,5 +1,7 @@
 package cubelify
 
+import "strings"
+
 type ResponseTagBuilder struct {
 	tag CubelifyResponseTag
 }
@@ -9,6 +11,9 @@ func NewCubelifyTagBuilder() *ResponseTagBuilder {
 }
 
 func (b *ResponseTagBuilder) SetIconName(iconName string) *ResponseTagBuilder {
+	if !strings.HasPrefix(iconName, "mdi-") {
+		iconName = "mdi-" + iconName
+	}
 	b.tag.IconName = iconName
 	return b
 }
