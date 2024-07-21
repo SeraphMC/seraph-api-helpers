@@ -26,7 +26,7 @@ type CubelifyResponse struct {
 
 type CubelifyScore struct {
 	Value float64 `json:"value,omitempty"`
-	Mode  string  `json:"mode,omitempty"`
+	Mode  *string `json:"mode,omitempty"`
 }
 
 type CubelifyResponseTag struct {
