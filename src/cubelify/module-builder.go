@@ -10,6 +10,10 @@ func NewCubelifyTagBuilder() *ResponseTagBuilder {
 	return &ResponseTagBuilder{}
 }
 
+func (b *ResponseTagBuilder) GetRawData() CubelifyResponseTag {
+	return b.tag
+}
+
 func (b *ResponseTagBuilder) SetIconName(iconName string) *ResponseTagBuilder {
 	if !strings.HasPrefix(iconName, "mdi-") {
 		iconName = "mdi-" + iconName
