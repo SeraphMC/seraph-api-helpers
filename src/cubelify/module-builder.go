@@ -1,6 +1,9 @@
 package cubelify
 
-import "strings"
+import (
+	"github.com/flosch/pongo2/v6"
+	"strings"
+)
 
 type ResponseTagBuilder struct {
 	tag CubelifyResponseTag
@@ -34,6 +37,22 @@ func (b *ResponseTagBuilder) SetTextColour(textColour uint32) *ResponseTagBuilde
 
 func (b *ResponseTagBuilder) SetToolTipLabel(toolTipLabel string) *ResponseTagBuilder {
 	b.tag.ToolTipLabel = toolTipLabel
+	return b
+}
+
+func (b *ResponseTagBuilder) SetToolTipLabelWithTemplating(defaultTooltip, templateTooltipString string, valueMap map[string]interface{}) *ResponseTagBuilder {
+	b.tag.ToolTipLabel = defaultTooltip
+	template, err := pongo2.FromString(templateTooltipString)
+	if err != nil {
+		return b
+	}
+
+	result, err := template.Execute(valueMap)
+	if err != nil {
+		return b
+	}
+
+	b.tag.ToolTipLabel = result
 	return b
 }
 
