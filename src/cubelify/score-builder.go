@@ -31,5 +31,8 @@ func (b *CubelifyScoreBuilder) RemoveValue(value float64) *CubelifyScoreBuilder 
 }
 
 func (b *CubelifyScoreBuilder) Build() *CubelifyScore {
+	if b.score.Value == 0 {
+		return nil
+	}
 	return b.score
 }
