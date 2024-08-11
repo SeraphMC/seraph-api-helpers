@@ -15,7 +15,7 @@ func (b *CubelifyScoreBuilder) SetValue(value float64) *CubelifyScoreBuilder {
 
 func (b *CubelifyScoreBuilder) SetMode(mode string) *CubelifyScoreBuilder {
 	if mode != "" && (mode == "add" || mode == "set") {
-		b.score.Mode = &mode
+		*b.score.Mode = mode
 	}
 	return b
 }
