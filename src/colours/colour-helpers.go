@@ -8,14 +8,13 @@ import (
 
 func HexToInt(hex string) (uint32, error) {
 	hex = strings.TrimPrefix(hex, "#")
-
-	value, err := strconv.ParseInt(hex, 16, 64)
-	if err != nil {
-		return 0, err
+	if len(hex) != 6 {
+		return 0, fmt.Errorf("invalid hex code")
 	}
 
-	if value < 0 || value > 0xFFFFFFFF {
-		return 0, fmt.Errorf("value out of range for uint32: %d", value)
+	value, err := strconv.ParseUint(hex, 16, 32)
+	if err != nil {
+		return 0, err
 	}
 
 	return uint32(value), nil
