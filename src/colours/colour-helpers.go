@@ -8,9 +8,6 @@ import (
 
 func HexToInt(hex string) (uint32, error) {
 	hex = strings.TrimPrefix(hex, "#")
-	if len(hex) != 6 {
-		return 0, fmt.Errorf("invalid hex code")
-	}
 
 	value, err := strconv.ParseUint(hex, 16, 32)
 	if err != nil {
