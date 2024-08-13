@@ -42,7 +42,7 @@ func (b *ResponseTagBuilder) SetTextLabelWithTemplating(defaultTextLabel, templa
 		return b
 	}
 
-	b.tag.ToolTipLabel = result
+	b.tag.TextLabel = result
 	return b
 }
 
@@ -68,7 +68,7 @@ func (b *ResponseTagBuilder) SetToolTipLabelWithTemplating(defaultTooltip, templ
 		return b
 	}
 
-	b.tag.TextLabel = result
+	b.tag.ToolTipLabel = result
 	return b
 }
 
