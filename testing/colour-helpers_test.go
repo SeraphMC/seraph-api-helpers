@@ -6,10 +6,11 @@ import (
 )
 
 func TestHexToInt(t *testing.T) {
-	got, _ := colours.HexToInt("#f71b1bff")
-	want := uint32(0xf71b1bff)
+	colour := "F0E1E1"
+	got, _ := colours.HexToInt(colour)
+	want := uint32(0xF0E1E1)
 
-	t.Logf("Hex: %s -> Decimal: %d\n", "#437284", got)
+	t.Logf("Hex: %s -> Decimal: %d\n", colour, got)
 	t.Logf("Expected: %d\n", want)
 
 	if got == want {
