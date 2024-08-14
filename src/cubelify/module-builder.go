@@ -31,7 +31,7 @@ func (b *ResponseTagBuilder) SetTextLabel(textLabel string) *ResponseTagBuilder 
 }
 
 func (b *ResponseTagBuilder) SetTextLabelWithTemplating(defaultTextLabel, templateTextLabelString string, valueMap map[string]interface{}) *ResponseTagBuilder {
-	b.tag.ToolTipLabel = defaultTextLabel
+	b.tag.TextLabel = defaultTextLabel
 	template, err := pongo2.FromString(templateTextLabelString)
 	if err != nil {
 		return b
