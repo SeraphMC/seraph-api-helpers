@@ -1,8 +1,11 @@
 module github.com/Clemintina/common_utilities-for-apis
 
-go 1.21
+go 1.22
+
+toolchain go1.23.0
 
 require (
+	github.com/carlmjohnson/requests v0.24.2
 	github.com/flosch/pongo2/v6 v6.0.0
 	github.com/goccy/go-json v0.10.3
 	github.com/gofiber/fiber/v2 v2.52.5
@@ -26,5 +29,6 @@ require (
 	github.com/valyala/tcplisten v1.0.0 // indirect
 	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
+	golang.org/x/net v0.27.0 // indirect
 	golang.org/x/sys v0.23.0 // indirect
 )
