@@ -60,7 +60,7 @@ func HandleError(ctx *fiber.Ctx, status int, cause string, errors []ErrorObject)
 		Code:          status,
 		Cause:         cause,
 		Extra:         errors,
-		Documentation: "https://api.seraph.si",
+		Documentation: ctx.BaseURL(),
 		MsTime:        time.Now().UnixMilli(),
 	}
 
