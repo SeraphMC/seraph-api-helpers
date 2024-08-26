@@ -24,6 +24,7 @@ func RemoveDuplicateWords(input string) string {
 
 	for _, word := range words {
 		if word == "|" {
+			result = append(result, word)
 			continue
 		}
 		if !wordMap[word] {
