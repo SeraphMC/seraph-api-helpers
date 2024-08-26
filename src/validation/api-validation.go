@@ -7,6 +7,13 @@ import (
 	"time"
 )
 
+type ErrorHandlerType = string
+
+const (
+	InvalidApiKey ErrorHandlerType = "Invalid API Key"
+	InvalidUuid   ErrorHandlerType = "Invalid UUID"
+)
+
 func HandleError(ctx *fiber.Ctx, status int, cause string, errors []ErrorObject) error {
 	ctx.Set(fiber.HeaderContentType, fiber.MIMEApplicationJSON)
 
@@ -24,16 +31,16 @@ func HandleError(ctx *fiber.Ctx, status int, cause string, errors []ErrorObject)
 			DeveloperReason: cause,
 			Code:            500,
 		})
-	} else if strings.Contains(cause, "Invalid UUID") {
+	} else if strings.Contains(cause, InvalidUuid) {
 		errors = append(errors, ErrorObject{
-			Name:            "Invalid UUID",
+			Name:            InvalidUuid,
 			Reason:          "Please enter a valid UUID v4 dashed or undashed",
 			DeveloperReason: "The UUID provided was not valid. Ensure you are using a v4 UUID.",
 			Code:            400,
 		})
-	} else if strings.Contains(cause, "Invalid API Key") {
+	} else if strings.Contains(cause, InvalidApiKey) {
 		errors = append(errors, ErrorObject{
-			Name:            "Invalid API Key",
+			Name:            InvalidApiKey,
 			Reason:          "The API Key has been locked or is invalid.",
 			DeveloperReason: "Check your API Key is valid and is in the header.",
 			Code:            401,
