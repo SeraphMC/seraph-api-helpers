@@ -35,3 +35,17 @@ func RemoveDuplicateWords(input string) string {
 
 	return strings.Join(result, " ")
 }
+
+func RemoveDuplicateFromArray(strings []string) []string {
+	seen := make(map[string]bool)
+	uniqueStrings := []string{}
+
+	for _, str := range strings {
+		if !seen[str] {
+			seen[str] = true
+			uniqueStrings = append(uniqueStrings, str)
+		}
+	}
+
+	return uniqueStrings
+}
