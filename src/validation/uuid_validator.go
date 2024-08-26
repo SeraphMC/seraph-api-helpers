@@ -16,3 +16,18 @@ func IsValidUuid(u string) bool {
 func FormatString(str string) string {
 	return strings.ToLower(strings.ReplaceAll(str, "-", ""))
 }
+
+func RemoveDuplicateWords(input string) string {
+	words := strings.Fields(input)
+	wordMap := make(map[string]bool)
+	var result []string
+
+	for _, word := range words {
+		if !wordMap[word] {
+			wordMap[word] = true
+			result = append(result, word)
+		}
+	}
+
+	return strings.Join(result, " ")
+}
