@@ -1,6 +1,6 @@
-module github.com/Clemintina/common_utilities-for-apis
+module github.com/Clemintina/seraph-api-helpers
 
-go 1.22
+go 1.23
 
 toolchain go1.23.0
 
