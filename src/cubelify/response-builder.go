@@ -1,7 +1,7 @@
 package cubelify
 
 import (
-	"github.com/Clemintina/common_utilities-for-apis/src/validation"
+	"github.com/Clemintina/seraph-api-helpers/src/validation"
 	"time"
 )
 

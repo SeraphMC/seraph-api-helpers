@@ -1,7 +1,7 @@
 package caching
 
 import (
-	"github.com/Clemintina/common_utilities-for-apis/src/validation"
+	"github.com/Clemintina/seraph-api-helpers/src/validation"
 	"github.com/goccy/go-json"
 	"github.com/gofiber/storage/redis"
 	"strings"

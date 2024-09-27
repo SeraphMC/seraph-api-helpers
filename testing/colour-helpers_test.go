@@ -1,7 +1,7 @@
 package testing
 
 import (
-	"github.com/Clemintina/common_utilities-for-apis/src/colours"
+	"github.com/Clemintina/seraph-api-helpers/src/colours"
 	"testing"
 )
 
