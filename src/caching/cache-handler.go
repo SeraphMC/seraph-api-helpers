@@ -1,6 +1,8 @@
 package caching
 
 import (
+	"bytes"
+	"compress/zlib"
 	"github.com/Clemintina/seraph-api-helpers/src/validation"
 	"github.com/goccy/go-json"
 	"github.com/gofiber/storage/redis"
@@ -8,7 +10,39 @@ import (
 	"time"
 )
 
-func GetFromCache[T interface{}](store *redis.Storage, cacheName string, customStrut T, playerUuid string, callback func(store *redis.Storage) *T) *T {
+func compress(data []byte) ([]byte, error) {
+	byteBuffer := new(bytes.Buffer)
+	writer := zlib.NewWriter(byteBuffer)
+
+	_, err := writer.Write(data)
+	if err != nil {
+		_ = writer.Close()
+		return nil, err
+	}
+
+	err = writer.Close()
+	if err != nil {
+		return nil, err
+	}
+	return byteBuffer.Bytes(), nil
+}
+
+func decompress(data []byte) ([]byte, error) {
+	reader, err := zlib.NewReader(bytes.NewReader(data))
+	if err != nil {
+		return nil, err
+	}
+	defer reader.Close()
+
+	out := new(bytes.Buffer)
+	_, err = out.ReadFrom(reader)
+	if err != nil {
+		return nil, err
+	}
+	return out.Bytes(), nil
+}
+
+func GetFromCache[T any](store *redis.Storage, cacheName string, customStruct T, playerUuid string, callback func(store *redis.Storage) *T) *T {
 	redisCache, err := store.Get(strings.ToLower(cacheName + ":" + validation.FormatString(playerUuid)))
 
 	if cacheName == "test" {
@@ -16,24 +50,40 @@ func GetFromCache[T interface{}](store *redis.Storage, cacheName string, customS
 	}
 
 	if redisCache != nil && err == nil {
-		commonCache := &customStrut
-		err = json.Unmarshal(redisCache, &commonCache)
-		return &customStrut
+		decompressedCache, err := decompress(redisCache)
+		if err != nil {
+			return callback(store)
+		}
+
+		commonCache := &customStruct
+		err = json.Unmarshal(decompressedCache, &commonCache)
+		if err == nil {
+			return &customStruct
+		}
 	}
 
 	return callback(store)
 }
 
-func AddToCacheOptional(store *redis.Storage, cacheName string, playerUuid string, customStrut interface{}, cacheTime time.Duration) error {
-	if err := AddToRedisCache(store, cacheName, playerUuid, customStrut, cacheTime); err != nil {
+func AddToCacheOptional(store *redis.Storage, cacheName string, playerUuid string, customStruct interface{}, cacheTime time.Duration) error {
+	if err := AddToRedisCache(store, cacheName, playerUuid, customStruct, cacheTime); err != nil {
 		return err
 	}
 	return nil
 }
 
-func AddToRedisCache(store *redis.Storage, cacheName string, playerUuid string, customStrut interface{}, cacheTime time.Duration) error {
-	player, _ := json.Marshal(&customStrut)
-	if err := store.Set(strings.ToLower(cacheName+":"+validation.FormatString(playerUuid)), player, cacheTime); err != nil {
+func AddToRedisCache(store *redis.Storage, cacheName string, playerUuid string, customStruct interface{}, cacheTime time.Duration) error {
+	playerData, err := json.Marshal(&customStruct)
+	if err != nil {
+		return err
+	}
+
+	compressedData, err := compress(playerData)
+	if err != nil {
+		return err
+	}
+
+	if err := store.Set(strings.ToLower(cacheName+":"+validation.FormatString(playerUuid)), compressedData, cacheTime); err != nil {
 		return err
 	}
 	return nil
