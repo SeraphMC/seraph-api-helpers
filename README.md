@@ -15,7 +15,7 @@ This Go module provides a collection of utility and helper functions that simpli
 To install the module in your Go project, run:
 
 ```bash
-go get github.com/Clemintina/seraph-api-helpers
+go get github.com/SeraphMC/seraph-api-helpers
 ```
 
 ## License
