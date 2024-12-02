@@ -3,7 +3,7 @@ package caching
 import (
 	"bytes"
 	"compress/zlib"
-	"github.com/Clemintina/seraph-api-helpers/src/validation"
+	"github.com/SeraphMC/seraph-api-helpers/src/validation"
 	"github.com/goccy/go-json"
 	"github.com/gofiber/storage/redis"
 	"strings"

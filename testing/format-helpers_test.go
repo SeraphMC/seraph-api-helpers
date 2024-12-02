@@ -1,7 +1,7 @@
 package testing
 
 import (
-	"github.com/Clemintina/seraph-api-helpers/src/utils"
+	"github.com/SeraphMC/seraph-api-helpers/src/utils"
 	"testing"
 	"time"
 )

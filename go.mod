@@ -1,8 +1,8 @@
-module github.com/Clemintina/seraph-api-helpers
+module github.com/SeraphMC/seraph-api-helpers
 
 go 1.23
 
-toolchain go1.23.0
+toolchain go1.23.1
 
 require (
 	github.com/carlmjohnson/requests v0.24.3
