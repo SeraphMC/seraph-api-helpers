@@ -10,9 +10,9 @@ import (
 	"time"
 )
 
-func compress(data []byte) ([]byte, error) {
+func Compress(data []byte) ([]byte, error) {
 	byteBuffer := new(bytes.Buffer)
-	writer := zlib.NewWriter(byteBuffer)
+	writer, _ := zlib.NewWriterLevel(byteBuffer, 6)
 
 	_, err := writer.Write(data)
 	if err != nil {
@@ -27,7 +27,7 @@ func compress(data []byte) ([]byte, error) {
 	return byteBuffer.Bytes(), nil
 }
 
-func decompress(data []byte) ([]byte, error) {
+func Decompress(data []byte) ([]byte, error) {
 	reader, err := zlib.NewReader(bytes.NewReader(data))
 	if err != nil {
 		return nil, err
@@ -50,7 +50,7 @@ func GetFromCache[T any](store *redis.Storage, cacheName string, customStruct T,
 	}
 
 	if redisCache != nil && err == nil {
-		decompressedCache, err := decompress(redisCache)
+		decompressedCache, err := Decompress(redisCache)
 		if err != nil {
 			return callback(store)
 		}
@@ -78,7 +78,7 @@ func AddToRedisCache(store *redis.Storage, cacheName string, playerUuid string, 
 		return err
 	}
 
-	compressedData, err := compress(playerData)
+	compressedData, err := Compress(playerData)
 	if err != nil {
 		return err
 	}
