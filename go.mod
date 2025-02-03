@@ -7,7 +7,7 @@ toolchain go1.23.1
 require (
 	github.com/carlmjohnson/requests v0.24.3
 	github.com/flosch/pongo2/v6 v6.0.0
-	github.com/goccy/go-json v0.10.4
+	github.com/goccy/go-json v0.10.5
 	github.com/gofiber/fiber/v2 v2.52.6
 	github.com/gofiber/storage/redis v1.3.4
 	github.com/google/uuid v1.6.0
