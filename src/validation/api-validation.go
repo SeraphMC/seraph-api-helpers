@@ -12,6 +12,7 @@ type ErrorHandlerType = string
 const (
 	InvalidApiKey ErrorHandlerType = "Invalid API Key"
 	InvalidUuid   ErrorHandlerType = "Invalid UUID"
+	InvalidToken  ErrorHandlerType = "Invalid Token"
 )
 
 func HandleError(ctx *fiber.Ctx, status int, cause string, errors []ErrorObject) error {
