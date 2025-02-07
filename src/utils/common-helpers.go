@@ -13,10 +13,17 @@ func IsDevelopmentMode() bool {
 }
 
 func CheckPermissions(ctx *fiber.Ctx, permissionName string) bool {
-	grants := ctx.Locals("grants").(string)
-
-	if slices.Contains(strings.Split(strings.ToLower(grants), ","), strings.ToLower(permissionName)) {
-		return true
+	grantsLocal := ctx.Locals("grants")
+	if grantsLocal == nil {
+		return false
 	}
-	return false
+
+	if grants, ok := grantsLocal.(string); !ok {
+		return false
+	} else {
+		if slices.Contains(strings.Split(strings.ToLower(grants), ","), strings.ToLower(permissionName)) {
+			return true
+		}
+		return false
+	}
 }
