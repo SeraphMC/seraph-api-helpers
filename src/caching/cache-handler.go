@@ -10,6 +10,7 @@ import (
 	"time"
 )
 
+// Compress compresses the input byte slice using zlib compression with level 6 and returns the compressed data or an error if compression fails.
 func Compress(data []byte) ([]byte, error) {
 	byteBuffer := new(bytes.Buffer)
 	writer, _ := zlib.NewWriterLevel(byteBuffer, 6)
@@ -27,6 +28,7 @@ func Compress(data []byte) ([]byte, error) {
 	return byteBuffer.Bytes(), nil
 }
 
+// Decompress takes a byte slice, decompresses it using zlib, and returns the resulting byte slice or an error if decompression fails.
 func Decompress(data []byte) ([]byte, error) {
 	reader, err := zlib.NewReader(bytes.NewReader(data))
 	if err != nil {
@@ -42,6 +44,7 @@ func Decompress(data []byte) ([]byte, error) {
 	return out.Bytes(), nil
 }
 
+// GetFromCache retrieves a cached value from Redis storage, decompresses it, and unmarshals it into the given structure. If no cache is found or on error, it invokes the provided callback to fetch a new value and returns it.
 func GetFromCache[T any](store *redis.Storage, cacheName string, customStruct T, playerUuid string, callback func(store *redis.Storage) *T) *T {
 	redisCache, err := store.Get(strings.ToLower(cacheName + ":" + validation.FormatString(playerUuid)))
 
@@ -65,6 +68,7 @@ func GetFromCache[T any](store *redis.Storage, cacheName string, customStruct T,
 	return callback(store)
 }
 
+// AddToCacheOptional stores a custom data structure in a Redis cache with optional parameters for cache time and compresses the data before storage.
 func AddToCacheOptional(store *redis.Storage, cacheName string, playerUuid string, customStruct interface{}, cacheTime time.Duration) error {
 	if err := AddToRedisCache(store, cacheName, playerUuid, customStruct, cacheTime); err != nil {
 		return err
@@ -72,6 +76,7 @@ func AddToCacheOptional(store *redis.Storage, cacheName string, playerUuid strin
 	return nil
 }
 
+// AddToRedisCache stores a compressed, JSON-encoded representation of a customStruct in the Redis cache under a key formed from a combination of cacheName and playerUuid, with a specified expiration time. Returns an error if encoding, compression, or storage fails.
 func AddToRedisCache(store *redis.Storage, cacheName string, playerUuid string, customStruct interface{}, cacheTime time.Duration) error {
 	playerData, err := json.Marshal(&customStruct)
 	if err != nil {

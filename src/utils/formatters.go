@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// FormatTimestamp formats the given timestamp as a human-readable string indicating years, months, days, and hours elapsed since the provided time.
 func FormatTimestamp(timestamp time.Time) string {
 	totalDuration := time.Now().Sub(timestamp)
 	totalHours := int(totalDuration.Hours())

@@ -7,15 +7,23 @@ import (
 	"time"
 )
 
+// ErrorHandlerType constants representing common error messages.
 type ErrorHandlerType = string
 
 const (
-	InvalidApiKey       ErrorHandlerType = "Invalid API Key"
-	InvalidUuid         ErrorHandlerType = "Invalid UUID"
-	InvalidToken        ErrorHandlerType = "Invalid Token"
+	// InvalidApiKey indicates an invalid API key error.
+	InvalidApiKey ErrorHandlerType = "Invalid API Key"
+	// InvalidUuid indicates an invalid UUID error.
+	InvalidUuid ErrorHandlerType = "Invalid UUID"
+	// InvalidToken indicates an invalid token error.
+	InvalidToken ErrorHandlerType = "Invalid Token"
+	// NotEnoughPermission indicates a permission-related error.
 	NotEnoughPermission ErrorHandlerType = "Not Enough Permission"
 )
 
+// HandleError generates and sends a JSON error response based on the given status, cause, and error details.
+// It handles specific error cases like unknown routes, invalid UUIDs, or API key issues.
+// The response contains metadata like request ID and documentation URL for debugging.
 func HandleError(ctx *fiber.Ctx, status int, cause string, errors []ErrorObject) error {
 	ctx.Set(fiber.HeaderContentType, fiber.MIMEApplicationJSON)
 
@@ -76,6 +84,7 @@ func HandleError(ctx *fiber.Ctx, status int, cause string, errors []ErrorObject)
 	return ctx.Status(status).JSON(errorResponse)
 }
 
+// ParseBody parses the HTTP request body into a generic type T and returns the result or an error if parsing fails.
 func ParseBody[T any](ctx *fiber.Ctx) (T, error) {
 	var bodyPost T
 	if err := ctx.BodyParser(&bodyPost); err != nil {
@@ -84,6 +93,7 @@ func ParseBody[T any](ctx *fiber.Ctx) (T, error) {
 	return bodyPost, nil
 }
 
+// ToTimePointer converts a time.Time value to a pointer to that value.
 func ToTimePointer(t time.Time) *time.Time {
 	return &t
 }
