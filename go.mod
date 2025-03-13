@@ -1,7 +1,6 @@
 module github.com/SeraphMC/seraph-api-helpers
 
 go 1.23
-
 toolchain go1.23.1
 
 require (
@@ -29,6 +28,6 @@ require (
 	github.com/valyala/tcplisten v1.0.0 // indirect
 	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
-	golang.org/x/net v0.34.0 // indirect
+	golang.org/x/net v0.36.0 // indirect
 	golang.org/x/sys v0.30.0 // indirect
 )
