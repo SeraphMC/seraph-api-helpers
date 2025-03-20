@@ -1,7 +1,7 @@
 module github.com/SeraphMC/seraph-api-helpers
 
 go 1.23
-toolchain go1.23.1
+toolchain go1.24.1
 
 require (
 	github.com/carlmjohnson/requests v0.24.3
@@ -21,7 +21,7 @@ require (
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
-	github.com/redis/go-redis/v9 v9.7.0 // indirect
+	github.com/redis/go-redis/v9 v9.7.3 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.58.0 // indirect
