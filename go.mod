@@ -8,7 +8,7 @@ require (
 	github.com/carlmjohnson/requests v0.24.3
 	github.com/flosch/pongo2/v6 v6.0.0
 	github.com/goccy/go-json v0.10.5
-	github.com/gofiber/fiber/v2 v2.52.6
+	github.com/gofiber/fiber/v2 v2.52.7
 	github.com/gofiber/storage/redis v1.3.4
 	github.com/google/uuid v1.6.0
 	github.com/r3labs/diff/v3 v3.0.1
@@ -26,7 +26,6 @@ require (
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.62.0 // indirect
-	github.com/valyala/tcplisten v1.0.0 // indirect
 	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	golang.org/x/net v0.40.0 // indirect
