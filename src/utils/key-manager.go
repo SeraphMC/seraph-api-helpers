@@ -40,8 +40,6 @@ func NewKeyManager(refreshInterval time.Duration) *KeyManager {
 }
 
 func (km *KeyManager) GetKey() (string, error) {
-	km.mutex.RLock()
-	defer km.mutex.RUnlock()
 	if km.apiToken == "" {
 		return "", fmt.Errorf("token not initialised")
 	}
@@ -51,22 +49,27 @@ func (km *KeyManager) GetKey() (string, error) {
 func (km *KeyManager) startAutoRefresh() {
 	ticker := time.NewTicker(km.refreshInterval)
 	defer ticker.Stop()
-
 	for range ticker.C {
-		if time.Now().After(km.expiry) {
-			km.mutex.Lock()
-			if !km.refreshing {
-				km.refreshing = true
-				km.mutex.Unlock()
-				err := km.refreshKey()
-				km.mutex.Lock()
+		km.tryRefreshKey()
+	}
+}
+
+func (km *KeyManager) tryRefreshKey() {
+	km.mutex.RLock()
+	expired := time.Now().After(km.expiry)
+	km.mutex.RUnlock()
+
+	if expired {
+		km.mutex.Lock()
+		if time.Now().After(km.expiry) && !km.refreshing {
+			km.refreshing = true
+			defer func() {
 				km.refreshing = false
 				km.mutex.Unlock()
-				if err != nil {
-					log.Printf("Error refreshing key: %v\n", err)
-				}
-			} else {
-				km.mutex.Unlock()
+			}()
+			err := km.refreshKey()
+			if err != nil {
+				log.Printf("Error refreshing key: %v\n", err)
 			}
 		} else {
 			km.mutex.Unlock()
@@ -81,9 +84,9 @@ func (km *KeyManager) refreshKey() error {
 	}
 
 	km.mutex.Lock()
-	defer km.mutex.Unlock()
 	km.apiToken = newKey
 	km.expiry = expiry
+	km.mutex.Unlock()
 	return nil
 }
 
