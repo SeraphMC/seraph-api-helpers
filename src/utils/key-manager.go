@@ -3,11 +3,12 @@ package utils
 import (
 	"context"
 	"fmt"
-	"github.com/carlmjohnson/requests"
 	"log"
 	"os"
 	"sync"
 	"time"
+
+	"github.com/carlmjohnson/requests"
 )
 
 type KeyManager struct {
@@ -17,6 +18,7 @@ type KeyManager struct {
 	expiry          time.Time
 	refreshing      bool
 	refreshInterval time.Duration
+	errorMsg        error
 }
 
 type KeyResponse struct {
@@ -30,9 +32,10 @@ func NewKeyManager(refreshInterval time.Duration) *KeyManager {
 		refreshToken:    os.Getenv("SERAPH_REFRESH_TOKEN"),
 	}
 
-	err := km.refreshKey()
+	err := km.RefreshToken()
 	if err != nil {
 		log.Printf("Error initialising key: %v\n", err)
+		km.errorMsg = err
 	}
 
 	go km.startAutoRefresh()
@@ -67,9 +70,10 @@ func (km *KeyManager) tryRefreshKey() {
 				km.refreshing = false
 				km.mutex.Unlock()
 			}()
-			err := km.refreshKey()
+			err := km.RefreshToken()
 			if err != nil {
 				log.Printf("Error refreshing key: %v\n", err)
+				km.errorMsg = err
 			}
 		} else {
 			km.mutex.Unlock()
@@ -77,7 +81,7 @@ func (km *KeyManager) tryRefreshKey() {
 	}
 }
 
-func (km *KeyManager) refreshKey() error {
+func (km *KeyManager) RefreshToken() error {
 	newKey, expiry, err := km.fetchNewToken()
 	if err != nil {
 		return err
@@ -105,4 +109,8 @@ func (km *KeyManager) fetchNewToken() (string, time.Time, error) {
 	}
 
 	return keyResponse.Token, expiresAt, nil
+}
+
+func (km *KeyManager) GetError() error {
+	return km.errorMsg
 }
