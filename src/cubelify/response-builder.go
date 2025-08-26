@@ -1,8 +1,9 @@
 package cubelify
 
 import (
-	"github.com/SeraphMC/seraph-api-helpers/src/validation"
 	"time"
+
+	"github.com/SeraphMC/seraph-api-helpers/src/validation"
 )
 
 type CubelifyResponseBuilder struct {

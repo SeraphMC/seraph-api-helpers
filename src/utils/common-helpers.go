@@ -1,10 +1,11 @@
 package utils
 
 import (
-	"github.com/gofiber/fiber/v2"
 	"os"
 	"slices"
 	"strings"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 // IsDevelopmentMode checks if the application is running in development mode by validating if the "APP_ENV" environment variable is set to "DEV". It returns true if the mode is "DEV", otherwise false.

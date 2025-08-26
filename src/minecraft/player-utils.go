@@ -3,6 +3,7 @@ package minecraft
 import (
 	"context"
 	"fmt"
+
 	"github.com/carlmjohnson/requests"
 )
 

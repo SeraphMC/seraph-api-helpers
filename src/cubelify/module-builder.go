@@ -1,8 +1,9 @@
 package cubelify
 
 import (
-	"github.com/flosch/pongo2/v6"
 	"strings"
+
+	"github.com/flosch/pongo2/v6"
 )
 
 type ResponseTagBuilder struct {

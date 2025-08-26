@@ -3,11 +3,12 @@ package caching
 import (
 	"bytes"
 	"compress/zlib"
+	"strings"
+	"time"
+
 	"github.com/SeraphMC/seraph-api-helpers/src/validation"
 	"github.com/goccy/go-json"
 	"github.com/gofiber/storage/redis"
-	"strings"
-	"time"
 )
 
 // Compress compresses the input byte slice using zlib compression with level 6 and returns the compressed data or an error if compression fails.

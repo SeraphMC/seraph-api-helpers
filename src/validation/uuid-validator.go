@@ -1,9 +1,10 @@
 package validation
 
 import (
-	"github.com/google/uuid"
 	"regexp"
 	"strings"
+
+	"github.com/google/uuid"
 )
 
 // IsValidUuid checks if the given string is a valid UUID.
