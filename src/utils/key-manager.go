@@ -43,6 +43,7 @@ func NewKeyManager(refreshInterval time.Duration) *KeyManager {
 }
 
 func (km *KeyManager) GetKey() (string, error) {
+	km.tryRefreshKey()
 	if km.apiToken == "" {
 		return "", fmt.Errorf("token not initialised")
 	}
