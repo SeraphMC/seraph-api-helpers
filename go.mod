@@ -1,6 +1,6 @@
 module github.com/SeraphMC/seraph-api-helpers
 
-go 1.25.0
+go 1.25.1
 
 require (
 	github.com/carlmjohnson/requests v0.24.3
