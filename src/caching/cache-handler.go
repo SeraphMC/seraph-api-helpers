@@ -50,7 +50,7 @@ func Decompress(data []byte) ([]byte, error) {
 }
 
 // GetFromCache retrieves a cached value from Redis storage, decompresses it, and unmarshals it into the given structure. If no cache is found or on error, it invokes the provided callback to fetch a new value and returns it.
-func GetFromCache[T any](store *redis.Storage, cacheName string, customStruct T, playerUuid string, callback func(store *redis.Storage) *T) *T {
+func GetFromCache[T any](store *redis.Storage, cacheName string, playerUuid string, callback func(store *redis.Storage) *T) *T {
 	redisCache, err := store.Get(strings.ToLower(cacheName + ":" + validation.FormatString(playerUuid)))
 
 	if cacheName == "test" {
@@ -63,10 +63,10 @@ func GetFromCache[T any](store *redis.Storage, cacheName string, customStruct T,
 			return callback(store)
 		}
 
-		commonCache := &customStruct
-		err = json.Unmarshal(decompressedCache, &commonCache)
+		var result T
+		err = json.Unmarshal(decompressedCache, &result)
 		if err == nil {
-			return &customStruct
+			return &result
 		}
 	}
 
