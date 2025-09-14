@@ -14,18 +14,22 @@ import (
 // Compress compresses the input byte slice using zlib compression with level 6 and returns the compressed data or an error if compression fails.
 func Compress(data []byte) ([]byte, error) {
 	byteBuffer := new(bytes.Buffer)
-	writer, _ := zlib.NewWriterLevel(byteBuffer, 6)
-
-	_, err := writer.Write(data)
-	if err != nil {
-		_ = writer.Close()
-		return nil, err
-	}
-
-	err = writer.Close()
+	writer, err := zlib.NewWriterLevel(byteBuffer, 6)
 	if err != nil {
 		return nil, err
 	}
+
+	defer writer.Close()
+
+	_, err = writer.Write(data)
+	if err != nil {
+		return nil, err
+	}
+
+	if err = writer.Close(); err != nil {
+		return nil, err
+	}
+
 	return byteBuffer.Bytes(), nil
 }
 
