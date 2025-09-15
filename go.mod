@@ -3,7 +3,7 @@ module github.com/SeraphMC/seraph-api-helpers
 go 1.25.1
 
 require (
-	github.com/carlmjohnson/requests v0.24.3
+	github.com/carlmjohnson/requests v0.25.1
 	github.com/flosch/pongo2/v6 v6.0.0
 	github.com/goccy/go-json v0.10.5
 	github.com/gofiber/fiber/v2 v2.52.9
