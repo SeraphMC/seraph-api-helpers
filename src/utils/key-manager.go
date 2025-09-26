@@ -99,7 +99,7 @@ func (km *KeyManager) fetchNewToken() (string, time.Time, error) {
 	requestBody := map[string]string{"token": km.refreshToken}
 	keyResponse := new(KeyResponse)
 
-	err := requests.URL("https://stash.seraph.si").Path("/auth/refresh").BodyJSON(requestBody).ToJSON(keyResponse).Fetch(context.Background())
+	err := requests.URL("https://auth.seraph.si").Path("/v1/refresh").BodyJSON(requestBody).ToJSON(keyResponse).Fetch(context.Background())
 	if err != nil {
 		return "", time.Time{}, err
 	}
