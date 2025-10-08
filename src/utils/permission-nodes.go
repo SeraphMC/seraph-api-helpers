@@ -29,8 +29,8 @@ const (
 	ClientLaby PermissionNode = "client/laby"
 	// ClientLunar User is allowed to fetch Lunar Client
 	ClientLunar PermissionNode = "client/lunar"
-	// ClientBlc User is allowed to fetch Badlion Client
-	ClientBlc PermissionNode = "client/blc"
+	// ClientBadlion User is allowed to fetch Badlion Client
+	ClientBadlion PermissionNode = "client/blc"
 	// ClientFeather User is allowed to fetch Feather Client
 	ClientFeather PermissionNode = "client/feather"
 	// ClientCosmetics User is allowed to fetch Cosmetics Client
@@ -73,7 +73,7 @@ var PermissionDescriptions = PermissionMap{
 	ClientEssential: "User is allowed to fetch Essential Client",
 	ClientLaby:      "User is allowed to fetch Labymod Client",
 	ClientLunar:     "User is allowed to fetch Lunar Client",
-	ClientBlc:       "User is allowed to fetch Badlion Client",
+	ClientBadlion:   "User is allowed to fetch Badlion Client",
 	ClientFeather:   "User is allowed to fetch Feather Client",
 	ClientCosmetics: "User is allowed to fetch Cosmetics Client",
 
