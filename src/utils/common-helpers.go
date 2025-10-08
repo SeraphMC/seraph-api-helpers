@@ -29,7 +29,7 @@ func CheckPermissions(ctx *fiber.Ctx, permissionName PermissionNode) bool {
 	if grants, ok := grantsLocal.(string); !ok {
 		return false
 	} else {
-		if slices.Contains(strings.Split(strings.ToLower(grants), ","), strings.ToLower(string(permissionName))) {
+		if slices.Contains(strings.Split(strings.ToLower(grants), ","), permissionName.GetName()) {
 			return true
 		}
 		return false
