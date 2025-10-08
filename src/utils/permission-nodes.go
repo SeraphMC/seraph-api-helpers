@@ -36,9 +36,9 @@ const (
 	// ClientCosmetics User is allowed to fetch Cosmetics Client
 	ClientCosmetics PermissionNode = "client/cosmetics"
 
-	// HypixelProxy User is allowed to fetch Hypixel Proxy
+	// HypixelProxy User is allowed to fetch data from the  Hypixel Proxy
 	HypixelProxy PermissionNode = "hypixel/proxy"
-	// HypixelLowCache User is allowed to fetch Hypixel Proxy with a lower cache time
+	// HypixelLowCache User is allowed to fetch data from the Hypixel Proxy with a lower cache time
 	HypixelLowCache PermissionNode = "hypixel/low-cache"
 	// HypixelLeaderboards User is allowed to fetch Hypixel Leaderboards
 	HypixelLeaderboards PermissionNode = "hypixel/leaderboards"
@@ -50,6 +50,70 @@ const (
 	// AccountUser User is allowed to fetch account data
 	AccountUser PermissionNode = "account/user"
 
-	// ErrorLogging User is allowed to modify error logging data
 	ErrorLogging PermissionNode = "error/logging"
 )
+
+// PermissionMap A stringly typed map so we can add helper functionss
+type PermissionMap map[PermissionNode]string
+
+// PermissionDescriptions A map so we can provide descriptions for each permission node.
+var PermissionDescriptions = PermissionMap{
+	PostData:   "Ability to post data to the API.",
+	PingAll:    "All ping fom a specified player.",
+	PingToday:  "Today's ping for a specified player.",
+	PingRecent: "Recent ping for a specified player.",
+
+	ChatAll:      "All chat messages from a specified player.",
+	ChatLobbyOne: "Live lobby chat messages",
+
+	AdminGenerate:      "Generate a new API key.",
+	AdminDeveloper:     "Developer Permissions.",
+	AdminDatabaseStats: "Allowed to fetch Database Stats.",
+
+	ClientEssential: "User is allowed to fetch Essential Client",
+	ClientLaby:      "User is allowed to fetch Labymod Client",
+	ClientLunar:     "User is allowed to fetch Lunar Client",
+	ClientBlc:       "User is allowed to fetch Badlion Client",
+	ClientFeather:   "User is allowed to fetch Feather Client",
+	ClientCosmetics: "User is allowed to fetch Cosmetics Client",
+
+	HypixelProxy:        "User is allowed to fetch data from the Hypixel Proxy",
+	HypixelLowCache:     "User is allowed to fetch data from the Hypixel Proxy with a lower cache time",
+	HypixelLeaderboards: "User is allowed to fetch Hypixel Leaderboards",
+	PlayerLookup:        "User is allowed to fetch player lookup data",
+
+	AccountLinking: "User is allowed to link players to an account",
+	AccountUser:    "User is allowed to fetch account data",
+
+	ErrorLogging: "User is allowed to modify error logging data",
+}
+
+// GetDescription Returns the description for a given permission node.
+func (pn PermissionNode) GetDescription() string {
+	description, ok := PermissionDescriptions[pn]
+
+	if !ok {
+		return "ERROR: Missing description for " + string(pn) + "."
+	}
+
+	return description
+}
+
+// GetName Returns the name of a permission node.
+func (pn PermissionNode) GetName() string {
+	return string(pn)
+}
+
+type ListAllPermissions struct{ Name, Description string }
+
+// GetPermissions Returns a list of all permissions.
+func (pm PermissionMap) GetPermissions() []ListAllPermissions {
+	permissionNodes := make([]ListAllPermissions, 0)
+
+	for node := range pm {
+		permissionNode := ListAllPermissions{Name: node.GetName(), Description: node.GetDescription()}
+		permissionNodes = append(permissionNodes, permissionNode)
+	}
+
+	return permissionNodes
+}
