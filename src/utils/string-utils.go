@@ -5,10 +5,12 @@ import (
 	"strings"
 )
 
-// RemoveStringDuplicates removes duplicate strings from the given array and returns the result.
-func RemoveStringDuplicates(strArray []string, options struct {
+type RemoveStringDuplicatesOptions struct {
 	Sort bool
-}) []string {
+}
+
+// RemoveStringDuplicates removes duplicate strings from the given array and returns the result.
+func RemoveStringDuplicates(strArray []string, options RemoveStringDuplicatesOptions) []string {
 	for i, grant := range strArray {
 		strArray[i] = strings.ToLower(strings.TrimSpace(grant))
 	}
