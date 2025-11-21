@@ -55,6 +55,7 @@ func RemoveDuplicateWords(input string) string {
 }
 
 // RemoveDuplicateFromArray removes duplicate strings from a slice and returns a new slice with unique elements in the order of their first appearance.
+// Deprecated: RemoveDuplicateFromArray Moved from validation to utils package. Use utils.RemoveStringDuplicates instead. This function will be removed without warning.
 func RemoveDuplicateFromArray(strings []string) []string {
 	seen := make(map[string]bool)
 	uniqueStrings := []string{}
