@@ -1,5 +1,7 @@
 package utils
 
+import "strings"
+
 const (
 	// PostData Ability to post data to the API.
 	PostData PermissionNode = "post/data"
@@ -116,4 +118,23 @@ func (pm PermissionMap) GetPermissions() []ListAllPermissions {
 	}
 
 	return permissionNodes
+}
+
+// AddPermissionFromList Adds a permission to a list of permissions.
+func AddPermissionFromList(currentGrants string, permissionNode PermissionNode) string {
+	existingGrants := strings.Split(currentGrants, ",")
+	existingGrants = append(existingGrants, permissionNode.GetName())
+	existingGrants = RemoveStringDuplicates(existingGrants, RemoveStringDuplicatesOptions{Sort: true})
+	return strings.Join(existingGrants, ",")
+}
+
+// AddPermissionFromArray Adds a permission from an array of permissions.
+func AddPermissionFromArray(currentGrants []string, permissionNode PermissionNode) string {
+	if len(currentGrants) == 0 {
+		return strings.Join(currentGrants, ",")
+	}
+
+	existingGrants := append(currentGrants, permissionNode.GetName())
+	existingGrants = RemoveStringDuplicates(existingGrants, RemoveStringDuplicatesOptions{Sort: true})
+	return strings.Join(existingGrants, ",")
 }
