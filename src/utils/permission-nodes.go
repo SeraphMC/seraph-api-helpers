@@ -53,6 +53,10 @@ const (
 	AccountUser PermissionNode = "account/user"
 
 	ErrorLogging PermissionNode = "error/logging"
+
+	ReleaseAlpha  PermissionNode = "release/alpha"
+	ReleaseBeta   PermissionNode = "release/beta"
+	ReleaseStable PermissionNode = "release/stable"
 )
 
 // PermissionMap A stringly typed map so we can add helper functionss
@@ -88,6 +92,10 @@ var PermissionDescriptions = PermissionMap{
 	AccountUser:    "User is allowed to fetch account data",
 
 	ErrorLogging: "User is allowed to modify error logging data",
+
+	ReleaseAlpha:  "User is allowed to fetch Alpha releases",
+	ReleaseBeta:   "User is allowed to fetch Beta releases",
+	ReleaseStable: "User is allowed to fetch Stable releases",
 }
 
 // GetDescription Returns the description for a given permission node.
