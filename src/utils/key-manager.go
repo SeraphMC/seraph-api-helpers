@@ -60,24 +60,26 @@ func (km *KeyManager) startAutoRefresh() {
 
 func (km *KeyManager) tryRefreshKey() {
 	km.mutex.RLock()
-	expired := time.Now().After(km.expiry)
+	expired := time.Now().After(km.expiry.Add(-5 * time.Minute))
 	km.mutex.RUnlock()
 
-	if expired {
-		km.mutex.Lock()
-		if time.Now().After(km.expiry) && !km.refreshing {
-			km.refreshing = true
-			defer func() {
-				km.refreshing = false
-				km.mutex.Unlock()
-			}()
-			err := km.RefreshToken()
-			if err != nil {
-				log.Printf("Error refreshing key: %v\n", err)
-				km.errorMsg = err
-			}
-		} else {
-			km.mutex.Unlock()
+	if !expired {
+		return
+	}
+
+	km.mutex.Lock()
+	defer km.mutex.Unlock()
+
+	if !km.refreshing && time.Now().After(km.expiry.Add(-5*time.Minute)) {
+		km.refreshing = true
+		defer func() {
+			km.refreshing = false
+		}()
+
+		err := km.RefreshToken()
+		if err != nil {
+			log.Printf("Error refreshing key: %v\n", err)
+			km.errorMsg = err
 		}
 	}
 }
