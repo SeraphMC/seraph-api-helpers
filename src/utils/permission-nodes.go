@@ -44,9 +44,13 @@ const (
 	HypixelLowCache PermissionNode = "hypixel/low-cache"
 	// HypixelLeaderboards User is allowed to fetch Hypixel Leaderboards
 	HypixelLeaderboards PermissionNode = "hypixel/leaderboards"
+
 	// PlayerLookup User is allowed to fetch player lookup data
 	PlayerLookup PermissionNode = "player/lookup"
+	// PlayerSearch User is allowed to fetch player search data
 	PlayerSearch PermissionNode = "player/search"
+	// PlayerHistory User is allowed to fetch player history data
+	PlayerHistory PermissionNode = "player/history"
 
 	// AccountLinking User is allowed to link players to an account
 	AccountLinking PermissionNode = "account/linking"
@@ -87,8 +91,10 @@ var PermissionDescriptions = PermissionMap{
 	HypixelProxy:        "User is allowed to fetch data from the Hypixel Proxy",
 	HypixelLowCache:     "User is allowed to fetch data from the Hypixel Proxy with a lower cache time",
 	HypixelLeaderboards: "User is allowed to fetch Hypixel Leaderboards",
-	PlayerLookup:        "User is allowed to fetch player lookup data",
-	PlayerSearch:        "User is allowed to fetch player search data",
+
+	PlayerLookup:  "User is allowed to fetch player lookup data",
+	PlayerSearch:  "User is allowed to fetch player search data",
+	PlayerHistory: "User is allowed to fetch player history data",
 
 	AccountLinking: "User is allowed to link players to an account",
 	AccountUser:    "User is allowed to fetch account data",
