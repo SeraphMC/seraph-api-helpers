@@ -1,7 +1,6 @@
 package validation
 
 import (
-	"regexp"
 	"strings"
 
 	"github.com/google/uuid"
@@ -10,22 +9,16 @@ import (
 // IsValidUuid checks if the given string is a valid UUID.
 // The function returns false for nil UUIDs or if the string does not conform to the UUID format.
 func IsValidUuid(uuidAsString string) bool {
-	if uuidAsString == "00000000000000000000000000000000" || uuidAsString == "00000000-0000-0000-0000-000000000000" {
+	parsedId, err := uuid.Parse(uuidAsString)
+	if err != nil {
 		return false
 	}
 
-	if len(uuidAsString) == 32 {
-		uuidAsString = uuidAsString[:8] + "-" + uuidAsString[8:12] + "-" + uuidAsString[12:16] + "-" + uuidAsString[16:20] + "-" + uuidAsString[20:]
-	}
-
-	uuidRegex := regexp.MustCompile(`^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$`)
-
-	if !uuidRegex.MatchString(uuidAsString) {
+	if parsedId == uuid.Nil {
 		return false
 	}
 
-	_, err := uuid.Parse(uuidAsString)
-	return err == nil
+	return true
 }
 
 // FormatString takes an input string, replaces all occurrences of "-" with "", and converts the string to lowercase, returning the transformed result.
