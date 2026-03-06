@@ -39,4 +39,6 @@ type CubelifyResponseTag struct {
 	ToolTipLabel string `json:"tooltip,omitempty"`
 	Colour       uint32 `json:"color,omitempty"`
 	TagName      string `json:"tag_name,omitempty"`
+	// Seraph specific type for mod integration
+	Alert bool `json:"alert,omitempty"`
 }

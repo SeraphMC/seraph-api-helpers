@@ -96,6 +96,12 @@ func (b *ResponseTagBuilder) SetTagName(tagName string) *ResponseTagBuilder {
 	return b
 }
 
+// SetAlert sets the alert flag for the response tag and returns the updated ResponseTagBuilder instance.
+func (b *ResponseTagBuilder) SetAlert(alert bool) *ResponseTagBuilder {
+	b.tag.Alert = alert
+	return b
+}
+
 // Build finalises and returns the constructed CubelifyResponseTag instance.
 func (b *ResponseTagBuilder) Build() CubelifyResponseTag {
 	return b.tag
