@@ -5,7 +5,7 @@ go 1.25.5
 require (
 	github.com/carlmjohnson/requests v0.25.1
 	github.com/flosch/pongo2/v6 v6.0.0
-	github.com/goccy/go-json v0.10.5
+	github.com/goccy/go-json v0.10.6
 	github.com/gofiber/fiber/v2 v2.52.12
 	github.com/gofiber/storage/redis/v3 v3.4.3
 	github.com/google/uuid v1.6.0
@@ -15,7 +15,6 @@ require (
 require (
 	github.com/andybalholm/brotli v1.2.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
-	github.com/clipperhouse/stringish v0.1.1 // indirect
 	github.com/clipperhouse/uax29/v2 v2.7.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/klauspost/compress v1.18.4 // indirect
