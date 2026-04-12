@@ -4,8 +4,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/utils"
+	"github.com/gofiber/fiber/v3"
+	"github.com/gofiber/utils/v2"
 )
 
 // ErrorHandlerType constants representing common error messages.
@@ -25,7 +25,7 @@ const (
 // HandleError generates and sends a JSON error response based on the given status, cause, and error details.
 // It handles specific error cases like unknown routes, invalid UUIDs, or API key issues.
 // The response contains metadata like request ID and documentation URL for debugging.
-func HandleError(ctx *fiber.Ctx, status int, cause string, errors []ErrorObject) error {
+func HandleError(ctx fiber.Ctx, status int, cause string, errors []ErrorObject) error {
 	ctx.Set(fiber.HeaderContentType, fiber.MIMEApplicationJSON)
 
 	if strings.Contains(cause, "Cannot GET") {
@@ -86,9 +86,9 @@ func HandleError(ctx *fiber.Ctx, status int, cause string, errors []ErrorObject)
 }
 
 // ParseBody parses the HTTP request body into a generic type T and returns the result or an error if parsing fails.
-func ParseBody[T any](ctx *fiber.Ctx) (T, error) {
+func ParseBody[T any](ctx fiber.Ctx) (T, error) {
 	var bodyPost T
-	if err := ctx.BodyParser(&bodyPost); err != nil {
+	if err := ctx.Bind().Body(&bodyPost); err != nil {
 		return bodyPost, err
 	}
 	return bodyPost, nil
