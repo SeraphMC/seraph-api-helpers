@@ -4,7 +4,7 @@ go 1.26.2
 
 require (
 	github.com/carlmjohnson/requests v0.25.1
-	github.com/flosch/pongo2/v6 v6.0.0
+	github.com/flosch/pongo2/v6 v6.1.0
 	github.com/goccy/go-json v0.10.6
 	github.com/gofiber/fiber/v3 v3.1.0
 	github.com/gofiber/storage/redis/v3 v3.4.3
