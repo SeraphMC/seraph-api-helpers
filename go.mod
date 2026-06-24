@@ -7,7 +7,7 @@ require (
 	github.com/flosch/pongo2/v6 v6.0.0
 	github.com/goccy/go-json v0.10.6
 	github.com/gofiber/fiber/v3 v3.1.0
-	github.com/gofiber/storage/redis/v3 v3.4.3
+	github.com/gofiber/storage/redis/v3 v3.4.5
 	github.com/gofiber/utils/v2 v2.0.2
 	github.com/google/uuid v1.6.0
 	github.com/r3labs/diff/v3 v3.0.2
